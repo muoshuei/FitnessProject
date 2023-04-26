@@ -1,4 +1,4 @@
-import * as REA from 'react-native-reanimated';
+import 'react-native-reanimated';
 import React from 'react';
 import {
     StyleSheet,
@@ -17,20 +17,17 @@ export function decode(frame: Frame): number {
 }
 
 const CameraPage = ({navigation}:any) => {
-    // const getCamPermission = async() =>{
-    //   const newCameraPermission = await Camera.requestCameraPermission();
-    //   console.log(newCameraPermission);
-    // }
+
     const [hasPermission, setHasPermission] = React.useState(false);
     // const [Results, setResults] = React.useState([] as TextResult[]);
     const devices = useCameraDevices();
     const device = devices.back;
-    // getCamPermission();
 
     const frameProcessor = useFrameProcessor((frame) => {
       'worklet'
       const results = decode(frame);
       console.log(frame.height + " *"  + frame.width + " = " + results);
+
     }, [])
 
     React.useEffect(() => {
