@@ -7,6 +7,7 @@ import {
 import { useCameraDevices, Camera, useFrameProcessor} from 'react-native-vision-camera';
 
 import type { Frame } from 'react-native-vision-camera'
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 /**
  * Do decode.
@@ -40,18 +41,19 @@ const CameraPage = ({navigation}:any) => {
     if (hasPermission)
       return (
         <>
-        <Camera 
-        style = {StyleSheet.absoluteFill}
-        device = {device}
-        isActive = {true}
-        frameProcessor={frameProcessor}
-        frameProcessorFps={5}
-        />
+          <Camera 
+            style = {StyleSheet.absoluteFill}
+            device = {device}
+            isActive = {true}
+            frameProcessor={frameProcessor}
+            frameProcessorFps={5}
+          />
           <Text style={styles.resultText}>
             results
           </Text>
         </>
       )
+    return <Text>Other error occured</Text>;
   }
   const styles = StyleSheet.create({
     container: {
