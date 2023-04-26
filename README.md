@@ -5,12 +5,17 @@ A School Project aiming for connecting react-native with mediapipe pose
 ### Frameworks used:
 
 react@18.0.0
+
 react-native@0.69.9
+
 react-native-vision-camera@2.14.1
+
 react-native-reanimated@2.10.0
 
 @react-navigation/native-stack@6.9.12
+
 @react-navigation/elements@1.3.17
+
 @react-navigation/native@6.1.6
 
 ### Note
