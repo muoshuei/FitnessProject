@@ -13,10 +13,10 @@ Version for react-native-vision-camera and react-native-reanimated seemed to be 
 
 ### Guide
 
-## Javascript 
+#### Javascript 
 Go to ./Assets/Components to see all react components used. Mostly inside CameraPage.tsx.
 
-## Java
+#### Java
 Go to ./android/app/src/main/java/com/newfitnessproject/mycustom
 
 Inside this directory, MyCustomPlugin.java works with most of the calculating logic.
