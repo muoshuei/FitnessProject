@@ -21,7 +21,7 @@ function App(): JSX.Element {
       <Stack.Navigator>
         <Stack.Screen name = "Home" component = {HomePage} />
         <Stack.Screen name = "Second" component = {SecondPage} />
-        <Stack.Screen name = "Camera" component = {CameraPage} />
+        <Stack.Screen name = "Camera" component = {CameraPage} options={{ headerShown: false}} />
       </Stack.Navigator>
     </NavigationContainer>
       

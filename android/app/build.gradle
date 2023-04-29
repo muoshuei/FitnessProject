@@ -210,6 +210,7 @@ android {
                 }
             }
         }
+
     }
 
     splits {
@@ -240,6 +241,10 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
@@ -259,7 +264,12 @@ android {
 }
 
 dependencies {
-    
+
+    // If you want to use the base sdk
+    implementation 'com.google.mlkit:pose-detection:18.0.0-beta3'
+    // If you want to use the accurate sdk
+    implementation 'com.google.mlkit:pose-detection-accurate:18.0.0-beta3'
+
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
     //noinspection GradleDynamicVersion
@@ -289,7 +299,7 @@ dependencies {
         implementation jscFlavor
     }
 
-     def camerax_version = "1.1.0-beta01"
+    def camerax_version = "1.1.0-beta01"
     implementation "androidx.camera:camera-core:${camerax_version}"
     implementation "androidx.camera:camera-camera2:${camerax_version}"
     implementation "androidx.camera:camera-lifecycle:${camerax_version}"
