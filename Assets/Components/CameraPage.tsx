@@ -1,18 +1,20 @@
-import 'react-native-reanimated';
+import * as REA from 'react-native-reanimated';
 import React from 'react';
 import {
     StyleSheet,
-    Text
+    Text,
+    View
   } from 'react-native';
 import { useCameraDevices, Camera, useFrameProcessor} from 'react-native-vision-camera';
 
 import type { Frame } from 'react-native-vision-camera'
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { MyObject } from './Types';
+import SvgLayer from './SvgLayer';
 
 /**
  * Do decode.
  */
-export function decode(frame: Frame): number {
+export function decode(frame: Frame): MyObject {
   'worklet'
   return __decode(frame);
 }
@@ -20,15 +22,17 @@ export function decode(frame: Frame): number {
 const CameraPage = ({navigation}:any) => {
 
     const [hasPermission, setHasPermission] = React.useState(false);
+    const [poseresults, setPoseResults] = React.useState({} as MyObject);
+    const [[width, height], setWidthHeight] = React.useState([0,0]);
     // const [Results, setResults] = React.useState([] as TextResult[]);
     const devices = useCameraDevices();
     const device = devices.back;
 
     const frameProcessor = useFrameProcessor((frame) => {
       'worklet'
-      const results = decode(frame);
-      console.log(frame.height + " *"  + frame.width + " = " + results);
-
+      console.log("FrameProcessor Loaded");
+      const results : MyObject = decode(frame);
+      REA.runOnJS(setWidthHeight)([frame.height, frame.width]);
     }, [])
 
     React.useEffect(() => {
@@ -38,7 +42,7 @@ const CameraPage = ({navigation}:any) => {
       })();
     }, []);
     if (device == null) return <Text>Camera not Loaded</Text>;
-    if (hasPermission)
+    if (hasPermission && poseresults.landmarkListLength != 0)
       return (
         <>
           <Camera 
@@ -46,11 +50,33 @@ const CameraPage = ({navigation}:any) => {
             device = {device}
             isActive = {true}
             frameProcessor={frameProcessor}
-            frameProcessorFps={5}
+            frameProcessorFps={20}
           />
-          <Text style={styles.resultText}>
-            results
-          </Text>
+          <View style={StyleSheet.absoluteFill}>
+            <Text style={styles.resultText}>
+              Left arm angle =
+              {poseresults.leftArm ? poseresults.leftArm.angle : 0}
+            </Text>
+            <Text style={styles.resultText}>
+              Right arm angle= 
+              {poseresults.rightArm ? poseresults.rightArm.angle : 0}
+            </Text>
+            <Text style={styles.resultText}>
+              Width = {width} Height = {height}
+            </Text>
+          </View>
+          <View style = {[
+            StyleSheet.absoluteFill, 
+            {zIndex:100}
+            ]}>
+            {
+            /**There is some problem with *Only* rendering with one SvgLayer. It seems that
+              * for only one SvgLayer receiving data, it cannot re-render the svgs inside.
+              * Using two SvgLayers and switching one back and forth is the work around for this case.
+            */}
+            <SvgLayer poseresults={poseresults} svgViewBox={"0 0 " + width + " " + height} rendered={rendered} ></SvgLayer>
+            <SvgLayer poseresults={poseresults} svgViewBox={"0 0 " + width + " " + height} rendered={!rendered} ></SvgLayer>
+          </View>
         </>
       )
     return <Text>Other error occured</Text>;
