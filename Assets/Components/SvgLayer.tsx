@@ -29,7 +29,7 @@ const SvgLayer = ({children, poseresults, svgViewBox, rendered}: SvgProps) =>{
     }
       
     console.log("Rendering...");
-
+    
     return (
       <Svg height="100%" width="100%" viewBox={svgViewBox}>
         <Circle 
@@ -53,68 +53,68 @@ const SvgLayer = ({children, poseresults, svgViewBox, rendered}: SvgProps) =>{
           r="50"
           fill="white"/> 
         <Circle 
-          cx = {poseresults.leftArm.shoulderX}
-          cy = {poseresults.leftArm.shoulderY}
+          cx = {poseresults.leftArm.joint1X}
+          cy = {poseresults.leftArm.joint1Y}
           r="5"
           fill="yellow"/>
         <Circle 
-          cx = {poseresults.leftArm.elbowX}
-          cy = {poseresults.leftArm.elbowY}
+          cx = {poseresults.leftArm.joint2X}
+          cy = {poseresults.leftArm.joint2Y}
           r="5"
           fill="green"/>
         <Circle 
-          cx = {poseresults.leftArm.wristX}
-          cy = {poseresults.leftArm.wristY}
+          cx = {poseresults.leftArm.joint3X}
+          cy = {poseresults.leftArm.joint3Y}
           r="5"
           fill="blue"/>
         <Circle 
-          cx = {poseresults.rightArm.shoulderX}
-          cy = {poseresults.rightArm.shoulderY}
+          cx = {poseresults.rightArm.joint1X}
+          cy = {poseresults.rightArm.joint1Y}
           r="5"
           fill="yellow"/>
         <Circle 
-          cx = {poseresults.rightArm.elbowX}
-          cy = {poseresults.rightArm.elbowY}
+          cx = {poseresults.rightArm.joint2X}
+          cy = {poseresults.rightArm.joint2Y}
           r="5"
           fill="green"/>
         <Circle 
-          cx = {poseresults.rightArm.wristX}
-          cy = {poseresults.rightArm.wristY}
+          cx = {poseresults.rightArm.joint3X}
+          cy = {poseresults.rightArm.joint3Y}
           r="5"
           fill="blue"/>
         <Line
-          x1={poseresults.leftArm.shoulderX}
-          y1={poseresults.leftArm.shoulderY}
-          x2={poseresults.leftArm.elbowX}
-          y2={poseresults.leftArm.elbowY}
+          x1={poseresults.leftArm.joint1X}
+          y1={poseresults.leftArm.joint1Y}
+          x2={poseresults.leftArm.joint2X}
+          y2={poseresults.leftArm.joint2Y}
           stroke="white"
           strokeWidth="2"/>
         <Line
-          x1={poseresults.leftArm.elbowX}
-          y1={poseresults.leftArm.elbowY}
-          x2={poseresults.leftArm.wristX}
-          y2={poseresults.leftArm.wristY}
+          x1={poseresults.leftArm.joint2X}
+          y1={poseresults.leftArm.joint2Y}
+          x2={poseresults.leftArm.joint3X}
+          y2={poseresults.leftArm.joint3Y}
           stroke="white"
           strokeWidth="2"/>
         <Line
-          x1={poseresults.rightArm.shoulderX}
-          y1={poseresults.rightArm.shoulderY}
-          x2={poseresults.rightArm.elbowX}
-          y2={poseresults.rightArm.elbowY}
+          x1={poseresults.rightArm.joint1X}
+          y1={poseresults.rightArm.joint1Y}
+          x2={poseresults.rightArm.joint2X}
+          y2={poseresults.rightArm.joint2Y}
           stroke="white"
           strokeWidth="2"/>
         <Line
-          x1={poseresults.rightArm.elbowX}
-          y1={poseresults.rightArm.elbowY}
-          x2={poseresults.rightArm.wristX}
-          y2={poseresults.rightArm.wristY}
+          x1={poseresults.rightArm.joint2X}
+          y1={poseresults.rightArm.joint2Y}
+          x2={poseresults.rightArm.joint3X}
+          y2={poseresults.rightArm.joint3Y}
           stroke="white"
           strokeWidth="2"/>
           <Line
-          x1={poseresults.leftArm.shoulderX}
-          y1={poseresults.leftArm.shoulderY}
-          x2={poseresults.rightArm.shoulderX}
-          y2={poseresults.rightArm.shoulderY}
+          x1={poseresults.leftArm.joint1X}
+          y1={poseresults.leftArm.joint1Y}
+          x2={poseresults.rightArm.joint1X}
+          y2={poseresults.rightArm.joint1Y}
           stroke="white"
           strokeWidth="2"/>
       </Svg>

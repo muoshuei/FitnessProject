@@ -18,7 +18,7 @@ export function decode(frame: Frame): MyObject {
   'worklet'
   return __decode(frame);
 }
-
+var rendered = true;
 const CameraPage = ({navigation}:any) => {
 
     const [hasPermission, setHasPermission] = React.useState(false);
@@ -32,7 +32,9 @@ const CameraPage = ({navigation}:any) => {
       'worklet'
       console.log("FrameProcessor Loaded");
       const results : MyObject = decode(frame);
+      console.log(results);
       REA.runOnJS(setWidthHeight)([frame.height, frame.width]);
+      REA.runOnJS(setPoseResults)(results);
     }, [])
 
     React.useEffect(() => {
@@ -43,6 +45,7 @@ const CameraPage = ({navigation}:any) => {
     }, []);
     if (device == null) return <Text>Camera not Loaded</Text>;
     if (hasPermission && poseresults.landmarkListLength != 0)
+    rendered = !rendered;
       return (
         <>
           <Camera 
@@ -50,7 +53,7 @@ const CameraPage = ({navigation}:any) => {
             device = {device}
             isActive = {true}
             frameProcessor={frameProcessor}
-            frameProcessorFps={20}
+            frameProcessorFps={5}
           />
           <View style={StyleSheet.absoluteFill}>
             <Text style={styles.resultText}>

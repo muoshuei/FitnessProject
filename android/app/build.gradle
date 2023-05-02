@@ -259,7 +259,11 @@ android {
 }
 
 dependencies {
-    
+    // If you want to use the base sdk
+    implementation 'com.google.mlkit:pose-detection:18.0.0-beta3'
+    // If you want to use the accurate sdk
+    implementation 'com.google.mlkit:pose-detection-accurate:18.0.0-beta3'
+
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
     //noinspection GradleDynamicVersion
